@@ -53,6 +53,13 @@ function App() {
     overflowY: "auto",
   };
 
+  // Output Calculation Logic
+  // 1. User will type JSX in textarea
+  // 2. that text need to be transformed by babel using convertJsxtoObject function
+  // 3. This function will retrun JS string
+  // 4. convert it into JS object
+  // 5. print that object in JSON format
+
   return (
     <>
       <div style={styleMainContainer}>
