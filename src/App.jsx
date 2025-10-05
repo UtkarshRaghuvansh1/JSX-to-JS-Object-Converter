@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { convertJSXtoObject } from "./converter";
-// import "./App.css";
+
+const REACT_ELEMENT_TYPE = Symbol.for("react.element");
 
 // Custom react createElement funtion to replicate react.createElement functionality
 // This function will retrun JS object (Vitual DOM object)
@@ -150,12 +151,18 @@ function App() {
   // data is in form of string
   // Need to convert it to JS object
   let output = "";
-  // eval() - > to evaluate a string code and convert it to JS code
-  const result = eval(convertedJSX);
 
-  // stringify the JS object into JSON string
-  output = JSON.stringify(result, null, 2);
-  // console.log("result", result);
+  try {
+    // eval() - > to evaluate a string code and convert it to JS code
+    const result = eval(convertedJSX);
+
+    // stringify the JS object into JSON string
+    output = JSON.stringify(result, null, 2);
+    // console.log("result", result);
+  } catch {
+    output = "⚠️ Invalid JSX";
+  }
+
   return (
     <div style={styleMainContainer}>
       <div style={styleHeader}>JSX to React Virtual DOM Converter</div>
