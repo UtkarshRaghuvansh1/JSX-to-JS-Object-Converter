@@ -9,15 +9,21 @@ import * as Babel from "@babel/standalone";
 export function convertJSXtoObject(code) {
   console.log(code);
   const trasnformedObject = Babel.transform(code, {
-    // This will automatically contain JSX tranform
+    // This will automatically contain JSX tranform feature
+    // It tells babel how to process file containing JSX
     // So we dont need plugins "@babel/plugin-transform-react-jsx"
+    // pragma specifies which function to use for element creation
     presets: ["react"],
+    // pragma specifies which function to use for element creation
+    plugins: [["transform-react-jsx", { pragma: "custCreateElement" }]],
   });
   console.log(trasnformedObject);
   console.log(trasnformedObject.code);
 
   return trasnformedObject.code;
 }
+
+// ******************** Initial Logic to Transform the JSX code using Pluggins **************
 //  {
 //   const trasnformedObject = Babel.transform(code, {
 //     // need a custom plugins to change JSX code

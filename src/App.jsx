@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { convertJSXtoObject } from "./converter";
 // import "./App.css";
 
@@ -13,7 +13,7 @@ function custCreateElement(type, props, children) {
       // children can contain another elements
       // div parent -> <p></p>
       // convert each children
-      children: children,
+      children: children.length === children,
     },
   };
 }
@@ -68,7 +68,13 @@ function App() {
 
   // data is in form of string
   // Need to convert it to JS object
+  let output = "";
+  // eval() - > to evaluate a string code and convert it to JS code
+  const result = eval(convertedJSX);
 
+  // stringify the JS object into JSON string
+  output = JSON.stringify(result, null, 2);
+  console.log("result", result);
   return (
     <>
       <div style={styleMainContainer}>
@@ -79,7 +85,7 @@ function App() {
         />
 
         {/* Right Panel */}
-        <pre style={styleRightPannel}></pre>
+        <pre style={styleRightPannel}>{output}</pre>
       </div>
     </>
   );
