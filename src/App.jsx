@@ -9,10 +9,21 @@ function custCreateElement(type, props, children) {
     type,
     props: {
       ...props, // id,className, other attributes
+
+      // children can contain another elements
+      // div parent -> <p></p>
+      // convert each children
+      children: children,
     },
   };
 }
 function App() {
+  // Default JSX code shown initially
+  const [jsxCode, setJsxCode] = useState(`<div id="root">
+  <h1>JSX Code </h1>
+  <p>Default JSX template</p>
+</div>
+    `);
   const styleMainContainer = {
     display: "flex",
     height: "100vh",
@@ -41,10 +52,11 @@ function App() {
     color: "#c5e478",
     overflowY: "auto",
   };
+
   return (
     <>
       <div style={styleMainContainer}>
-        <textarea style={styleLeftPannel} />
+        <textarea value={jsxCode} style={styleLeftPannel} />
 
         {/* Right Panel */}
         <pre style={styleRightPannel}></pre>
