@@ -56,7 +56,11 @@ function App() {
   return (
     <>
       <div style={styleMainContainer}>
-        <textarea value={jsxCode} style={styleLeftPannel} />
+        <textarea
+          value={jsxCode}
+          onChange={(e) => setJsxCode(e.target.value)}
+          style={styleLeftPannel}
+        />
 
         {/* Right Panel */}
         <pre style={styleRightPannel}></pre>
