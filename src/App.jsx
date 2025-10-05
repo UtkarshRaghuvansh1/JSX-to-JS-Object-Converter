@@ -4,18 +4,33 @@ import { convertJSXtoObject } from "./converter";
 
 // Custom react createElement funtion to replicate react.createElement functionality
 // This function will retrun JS object (Vitual DOM object)
-function custCreateElement(type, props, children) {
-  return {
-    type,
-    props: {
-      ...props, // id,className, other attributes
+function custCreateElement(type, props, ...children) {
+  // Children can be string/number/conditions/fragments.....
+  // How to Handle this?
+  //children will contain array of nested element need to flatten this
+  // To get single level array
+  // Also filter null or boolean value
+  console.log("child before", children);
+  const flatChildren = children.flat();
+  const normalizedChildren = flatChildren
+    .map((child) => {
+      if (child === null || child === undefined || typeof child === "boolean")
+        return null;
+      if (typeof child === "string" || typeof child === "number") return child;
+      if (typeof child === "object") return child;
+      return String(child);
+    })
+    .filter((c) => c !== null);
 
-      // children can contain another elements
-      // div parent -> <p></p>
-      // convert each children
-      children: children.length === children,
-    },
-  };
+  // Since Props are immutable that is why creating a copy of it
+  const finalProps = { ...props };
+
+  if (normalizedChildren.length === 1) {
+    finalProps.children = normalizedChildren[0];
+  } else if (normalizedChildren.length > 1) {
+    finalProps.children = normalizedChildren;
+  }
+  return { type, props: finalProps };
 }
 function App() {
   // Default JSX code shown initially
@@ -63,8 +78,8 @@ function App() {
   // Convert JSX to JS using Babel
   const convertedJSX = convertJSXtoObject(jsxCode);
 
-  console.log("converted code", convertedJSX);
-  console.log(typeof convertedJSX);
+  // console.log("converted code", convertedJSX);
+  // console.log(typeof convertedJSX);
 
   // data is in form of string
   // Need to convert it to JS object
@@ -74,7 +89,7 @@ function App() {
 
   // stringify the JS object into JSON string
   output = JSON.stringify(result, null, 2);
-  console.log("result", result);
+  // console.log("result", result);
   return (
     <>
       <div style={styleMainContainer}>

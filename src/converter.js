@@ -7,7 +7,7 @@ import * as Babel from "@babel/standalone";
 // Function to Convert JSX to JS
 // JSX will be in form of string
 export function convertJSXtoObject(code) {
-  console.log(code);
+  //   console.log(code);
   const trasnformedObject = Babel.transform(code, {
     // This will automatically contain JSX tranform feature
     // It tells babel how to process file containing JSX
@@ -17,8 +17,8 @@ export function convertJSXtoObject(code) {
     // pragma specifies which function to use for element creation
     plugins: [["transform-react-jsx", { pragma: "custCreateElement" }]],
   });
-  console.log(trasnformedObject);
-  console.log(trasnformedObject.code);
+  //   console.log(trasnformedObject);
+  //   console.log(trasnformedObject.code);
 
   return trasnformedObject.code;
 }
