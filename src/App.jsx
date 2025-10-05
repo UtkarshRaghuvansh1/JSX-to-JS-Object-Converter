@@ -60,6 +60,15 @@ function App() {
   // 4. convert it into JS object
   // 5. print that object in JSON format
 
+  // Convert JSX to JS using Babel
+  const convertedJSX = convertJSXtoObject(jsxCode);
+
+  console.log("converted code", convertedJSX);
+  console.log(typeof convertedJSX);
+
+  // data is in form of string
+  // Need to convert it to JS object
+
   return (
     <>
       <div style={styleMainContainer}>
