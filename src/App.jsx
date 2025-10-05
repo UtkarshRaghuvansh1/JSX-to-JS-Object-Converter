@@ -165,7 +165,7 @@ function App() {
 
   return (
     <div style={styleMainContainer}>
-      <div style={styleHeader}>JSX to React Virtual DOM Converter</div>
+      <div style={styleHeader}>React Virtual DOM Visualizer</div>
       <div style={styleDescription}>
         Type your JSX code in the left panel. The right panel will display the
         equivalent React Virtual DOM object in JSON format.
