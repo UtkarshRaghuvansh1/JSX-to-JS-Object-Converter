@@ -34,10 +34,23 @@ function custCreateElement(type, props, ...children) {
 }
 function App() {
   // Default JSX code shown initially
-  const [jsxCode, setJsxCode] = useState(`<div id="root">
-  <h1>JSX Code </h1>
-  <p>Default JSX template</p>
-</div>
+  const [jsxCode, setJsxCode] = useState(`      const name = "Utkarsh";
+      const loggedIn = true;
+      const items = ["Apple", "Banana", "Cherry"];
+
+      function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+      }
+
+      <>
+        <div>Hello, {name}!</div>
+        <div>{loggedIn ? <h2>Welcome back!</h2> : <h2>Please sign in</h2>}</div>
+        <ul>
+          {items.map(item => <li>{item}</li>)}
+        </ul>
+        <Welcome name={name} />
+        <div style={{ color: "blue", fontSize: "20px" }}>Styled Text</div>
+      </>
     `);
   const styleMainContainer = {
     display: "flex",
